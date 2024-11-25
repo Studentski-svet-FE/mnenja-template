@@ -1,0 +1,49 @@
+\usepackage[dvipsnames]{xcolor}
+\usepackage[slovene]{babel}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{titlesec}
+
+\setmainfont{Roboto}
+\titleformat{\section}[block]{\fontsize{18}{18}\bfseries\filcenter}{}{1em}{}
+
+% Izklop zamika za paragraf
+\setlength{\parindent}{0pt}
+% Presledki med paragrafi
+\setlength{\parskip}{1em}
+
+\let\oldnewpage\newpage
+\renewcommand*{\newpage}{\oldnewpage\includegraphics[height=2.637cm]{sivlogo.pdf}\vspace*{2cm}}
+
+\newcommand{\avtor}[2]{
+    \hfill
+    \begin{tabular}{c}
+        #1\\
+        \hfill#2
+    \end{tabular}
+}
+
+
+% Študentska mnenja
+%% Ocena mnenja
+\newcommand{\pozitivno}{{\color{LimeGreen} \textbf{POZITIVNO}}}
+\newcommand{\negativno}{{\color{Red} \textbf{NEGATIVNO}}}
+
+
+% Zapisniki
+%% Števci za točke in sklepe
+\newcounter{točkecnt}  
+\newcounter{sklepcnt}
+
+%% Točka
+\newcommand{\ad}{
+    \refstepcounter{točkecnt}
+    \textbf{AD \thetočkecnt)}
+}
+
+%% Sklep
+\newcommand{\sklep}{
+    \refstepcounter{sklepcnt}
+    \textbf{SKLEP \thesklepcnt)}
+}
