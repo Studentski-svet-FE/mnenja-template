@@ -1,9 +1,11 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[slovene]{babel}
-\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage[a4paper, margin=2cm, top=5.5cm]{geometry}
 \usepackage{graphicx}
 \usepackage{fontspec}
 \usepackage{titlesec}
+\usepackage{eso-pic}
+\usepackage[absolute,overlay]{textpos}
 
 \setmainfont{Roboto}
 \titleformat{\section}[block]{\fontsize{18}{18}\bfseries\filcenter}{}{1em}{}
@@ -13,16 +15,38 @@
 % Presledki med paragrafi
 \setlength{\parskip}{1em}
 
-\let\oldnewpage\newpage
-\renewcommand*{\newpage}{\oldnewpage\includegraphics[height=2.637cm]{sivlogo.pdf}\vspace*{2cm}}
+% Števci za točke (AD) in sklepe
+\newcounter{točkecnt}
+\newcounter{sklepcnt}
 
-\newcommand{\avtor}[2]{
-    \hfill
-    \begin{tabular}{c}
-        #1\\
-        \hfill#2
-    \end{tabular}
+% točke in sklepi
+\newcommand{\ad}{
+    \refstepcounter{točkecnt}
+    \textbf{AD \thetočkecnt)}
 }
+
+\newcommand{\sklep}{
+    \refstepcounter{sklepcnt}
+    \textbf{SKLEP \thesklepcnt)}
+}
+
+% Background logos
+%% First page
+\AddToShipoutPictureBG*{
+    \AtPageLowerLeft{
+        \put(12.7mm, \dimexpr\paperheight-15mm-2.637cm\relax){\includegraphics[height=2.637cm]{barvlogo.pdf}}
+    }
+}
+
+
+%% All other pages (black and white)
+\AddToShipoutPictureBG{
+    \AtPageLowerLeft{
+        \put(12.7mm, \dimexpr\paperheight-15mm-2.637cm\relax){\includegraphics[height=2.637cm]{sivlogo.pdf}}
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % Študentska mnenja
@@ -30,20 +54,10 @@
 \newcommand{\pozitivno}{{\color{LimeGreen} \textbf{POZITIVNO}}}
 \newcommand{\negativno}{{\color{Red} \textbf{NEGATIVNO}}}
 
-
-% Zapisniki
-%% Števci za točke in sklepe
-\newcounter{točkecnt}  
-\newcounter{sklepcnt}
-
-%% Točka
-\newcommand{\ad}{
-    \refstepcounter{točkecnt}
-    \textbf{AD \thetočkecnt)}
-}
-
-%% Sklep
-\newcommand{\sklep}{
-    \refstepcounter{sklepcnt}
-    \textbf{SKLEP \thesklepcnt)}
+\newcommand{\avtor}[2]{
+    \hfill
+    \begin{tabular}{c}
+        #1\\
+        \hfill#2
+    \end{tabular}
 }
